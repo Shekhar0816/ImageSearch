@@ -7,17 +7,18 @@ const showMoreBtn = document.getElementById("show-more-btn");
 
 
 let keyword = "";
-let pge = 1;
+let page = 1;
 
 async function searchImages(){
     keyword = searchBox.value;
-    const url = `https://api.unsplash.com/search/photos?page=${pge}&query=${keyword}&client_id=${accessKey}&per_page=15`;
+    const url = `https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${accessKey}&per_page=15`;
     console.log(url);
     const response = await fetch(url);
     const data = await response.json();
-
+    
+    // console.log(keyword);
     // console.log(url);
-    if(pge==1){
+    if(page==1){
         searchResult.innerHTML = "";
     }
 
@@ -38,11 +39,11 @@ async function searchImages(){
 
 searchForm.addEventListener("submit", (e) =>{
     e.preventDefault();
-    pge = 1;
+    page = 1;
     searchImages();
 })
 
 showMoreBtn.addEventListener("click", ()=>{
-    pge++;
+    page++;
     searchImages();
 })
