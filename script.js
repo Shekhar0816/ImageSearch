@@ -1,4 +1,4 @@
-// const accessKey = "sRQ-0DsqCFCdGKvKUWRMkQGGUqKp1_sGUHt-Vk75--8";
+const accessKey = "sRQ-0DsqCFCdGKvKUWRMkQGGUqKp1_sGUHt-Vk75--8";
 
 const searchForm = document.getElementById("search-form");
 const searchBox = document.getElementById("search-box");
@@ -7,20 +7,20 @@ const showMoreBtn = document.getElementById("show-more-btn");
 
 
 let keyword = "";
-let page = 1;
+let pge = 1;
 
 async function searchImages(){
     keyword = searchBox.value;
-    const url = "https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=sRQ-0DsqCFCdGKvKUWRMkQGGUqKp1_sGUHt-Vk75--8&per_page=15";
-    // console.log(keyword);
+    const url = `https://api.unsplash.com/search/photos?page=${pge}&query=${keyword}&client_id=${accessKey}&per_page=15`;
+    console.log(url);
     const response = await fetch(url);
     const data = await response.json();
 
-    // console.log(data);
-    if(page==1){
+    // console.log(url);
+    if(pge==1){
         searchResult.innerHTML = "";
     }
-    
+
     const results = data.results;
 
     results.map((result) =>{
@@ -38,11 +38,11 @@ async function searchImages(){
 
 searchForm.addEventListener("submit", (e) =>{
     e.preventDefault();
-    page = 1;
+    pge = 1;
     searchImages();
 })
 
 showMoreBtn.addEventListener("click", ()=>{
-    page++;
+    pge++;
     searchImages();
 })
